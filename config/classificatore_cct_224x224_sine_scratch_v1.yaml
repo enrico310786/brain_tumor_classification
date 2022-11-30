@@ -1,0 +1,25 @@
+dataset:
+  dataset_path: ./dataset/augmented_images_30_classi_v1/
+  path_dataset_train_csv: train_dataset_trasmissioni_augmented.csv
+  path_dataset_val_csv: val_dataset_trasmissioni_augmented.csv
+  path_dataset_test_csv: test_dataset_trasmissioni_augmented.csv
+  batch_size: 32
+model:
+  name_pretrained_model: cct_7_7x2_224_sine
+  pretrained: 0
+  saving_dir_experiments: ./exps_classificatore_trasmissioni/classificatore_cct_7_7x2_224_sine_scratch_v1/
+  saving_dir_model: models_v1
+  num_classes: 10
+  num_epoch: 300
+  learning_rate: 0.01
+  scheduler_step_size: 300
+  scheduler_gamma: 0.5
+  freeze_layers: 0
+  n_nodes: 192
+  dropout: 0.3
+  do_train: 1
+  do_test: 1
+data:
+  size: 224
+
+
