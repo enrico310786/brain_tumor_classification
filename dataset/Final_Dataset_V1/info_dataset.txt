@@ -1,0 +1,116 @@
+/home/userpc/PycharmProjects/brain_tumor_classification/venv/bin/python /home/userpc/PycharmProjects/brain_tumor_classification/data_preprocess.py
+Create the directory '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Final_Dataset_V1'
+ TRAIN/ VAL SPLIT
+class_name:  glioma_tumor
+number_files in directory '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Training/glioma_tumor': 826
+Number of files in dir '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Final_Dataset_V1/train/glioma_tumor': 661
+Number of files in dir '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Final_Dataset_V1/val/glioma_tumor': 165
+----------------------------------------------------------------
+class_name:  meningioma_tumor
+number_files in directory '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Training/meningioma_tumor': 822
+Number of files in dir '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Final_Dataset_V1/train/meningioma_tumor': 658
+Number of files in dir '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Final_Dataset_V1/val/meningioma_tumor': 164
+----------------------------------------------------------------
+class_name:  no_tumor
+number_files in directory '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Training/no_tumor': 395
+Number of files in dir '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Final_Dataset_V1/train/no_tumor': 316
+Number of files in dir '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Final_Dataset_V1/val/no_tumor': 79
+----------------------------------------------------------------
+class_name:  pituitary_tumor
+number_files in directory '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Training/pituitary_tumor': 827
+Number of files in dir '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Final_Dataset_V1/train/pituitary_tumor': 662
+Number of files in dir '/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Final_Dataset_V1/val/pituitary_tumor': 165
+----------------------------------------------------------------
+-----------------------------------------------
+-----------------------------------------------
+list_classes:  ['glioma_tumor', 'meningioma_tumor', 'no_tumor', 'pituitary_tumor']
+
+list_classes:  glioma_tumor,meningioma_tumor,no_tumor,pituitary_tumor
+
+class2label:  {'glioma_tumor': 0, 'meningioma_tumor': 1, 'no_tumor': 2, 'pituitary_tumor': 3}
+-----------------------------------------------
+-----------------------------------------------
+Create csv files
+Train set
+class_name:  glioma_tumor
+class_name:  meningioma_tumor
+class_name:  no_tumor
+class_name:  pituitary_tumor
+Test set
+class_name:  glioma_tumor
+class_name:  meningioma_tumor
+class_name:  no_tumor
+class_name:  pituitary_tumor
+Val set
+class_name:  glioma_tumor
+class_name:  meningioma_tumor
+class_name:  no_tumor
+class_name:  pituitary_tumor
+-------------------------------------------------------------
+-------------------------------------------------------------
+df_train info
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2297 entries, 0 to 2296
+Data columns (total 3 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   CLASS   2297 non-null   object
+ 1   PATH    2297 non-null   object
+ 2   LABEL   2297 non-null   object
+dtypes: object(3)
+memory usage: 54.0+ KB
+None
+-------------------------------------------------------------
+
+df_test info
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 394 entries, 0 to 393
+Data columns (total 3 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   CLASS   394 non-null    object
+ 1   PATH    394 non-null    object
+ 2   LABEL   394 non-null    object
+dtypes: object(3)
+memory usage: 9.4+ KB
+None
+-------------------------------------------------------------
+
+df_val info
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 573 entries, 0 to 572
+Data columns (total 3 columns):
+ #   Column  Non-Null Count  Dtype
+---  ------  --------------  -----
+ 0   CLASS   573 non-null    object
+ 1   PATH    573 non-null    object
+ 2   LABEL   573 non-null    object
+dtypes: object(3)
+memory usage: 13.6+ KB
+None
+-------------------------------------------------------------
+df_train:  CLASS values count
+CLASS
+pituitary_tumor     662
+glioma_tumor        661
+meningioma_tumor    658
+no_tumor            316
+dtype: int64
+-------------------------------------------------------------
+df_test:  CLASS values count
+CLASS
+meningioma_tumor    115
+no_tumor            105
+glioma_tumor        100
+pituitary_tumor      74
+dtype: int64
+-------------------------------------------------------------
+df_val:  CLASS values count
+CLASS
+glioma_tumor        165
+pituitary_tumor     165
+meningioma_tumor    164
+no_tumor             79
+dtype: int64
+
+Process finished with exit code 0

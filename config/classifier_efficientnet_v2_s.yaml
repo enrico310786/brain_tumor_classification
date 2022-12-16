@@ -5,22 +5,24 @@ dataset:
   path_dataset_test_csv: test_dataset_trasmissioni_augmented.csv
   batch_size: 32
 model:
-  name_pretrained_model: efficientnet_b4
-  saving_dir_experiments: ./exps_classificatore_trasmissioni/classificatore_30_classi_v1/
+  name_pretrained_model: efficientnet_v2_s
+  saving_dir_experiments: ./exps_classifier_brain_tumor/efficientnet_v2_s/
   saving_dir_model: models_v1
-  num_classes: 30
-  num_epoch: 30
+  num_classes: 4
+  num_epoch: 40
   learning_rate: 0.001
-  scheduler_step_size: 6
+  scheduler_step_size: 8
   scheduler_gamma: 0.5
   freeze_layers: 1
-  epoch_start_unfreeze: 6
-  layer_start_unfreeze: 0
+  epoch_start_unfreeze: 8
+  #layer_start_unfreeze: 0
   n_nodes: 256
   dropout: 0.3
   do_train: 1
   do_test: 1
 data:
   size: 224
+  do_resize: 1
+  normalization: imagenet
 
 

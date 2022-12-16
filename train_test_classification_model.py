@@ -3,7 +3,8 @@ import pandas as pd
 import torch
 import torch.nn as nn
 from tqdm import tqdm
-from data_image_classification import create_loaders
+
+from data import create_loaders
 from image_classification_model import ImageClassificationModel, find_last_checkpoint_file
 from logger import Logger
 import numpy as np

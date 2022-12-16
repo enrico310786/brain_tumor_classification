@@ -13,7 +13,16 @@ class ClassificationDataset(torch.utils.data.Dataset):
         self.df_dataset = df_dataset
         self.dataset_path = dataset_path
         self.cfg = cfg
-        self.normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        self.do_resize = cfg["data"].get("do_resize", 1.0) > 0.0
+        if cfg["data"]["normalization"] == "pm1":
+            print("Apply pm1 normalization")
+            self.normalize = transforms.Normalize(mean=[0.5, 0.5, 0.5], std=[0.5, 0.5, 0.5])
+        elif cfg["data"]["normalization"] == "imagenet":
+            print("Apply imagenet normalization")
+            self.normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+        elif cfg["data"]["normalization"] == "None":
+            print("No normalization to apply")
+            self.normalize = None
 
     def __len__(self):
         return len(self.df_dataset)
@@ -23,13 +32,15 @@ class ClassificationDataset(torch.utils.data.Dataset):
         label = self.df_dataset.iloc[idx]["LABEL"]
 
         if not os.path.exists(img_path):
-            print("L'immagine '{}' non esiste ".format(img_path))
+            print("The image '{}' does not exist ".format(img_path))
 
         img = cv2.imread(img_path)
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-        #img = cv2.resize(img, (self.cfg["input_size"], self.cfg["input_size"]))
+        if self.do_resize:
+            img = cv2.resize(img, (self.cfg["data"]["size"], self.cfg["data"]["size"]))
         img = transforms.ToTensor()(img)
-        img = self.normalize(img)
+        if self.normalize is not None:
+            img = self.normalize(img)
 
         return img, label
 

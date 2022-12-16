@@ -2,7 +2,8 @@ import torch.nn as nn
 from torchvision import models
 from torchvision.models import EfficientNet_B0_Weights, EfficientNet_B1_Weights, EfficientNet_B2_Weights, \
     EfficientNet_B3_Weights, EfficientNet_B4_Weights, EfficientNet_B5_Weights, EfficientNet_B6_Weights, \
-    EfficientNet_B7_Weights, ResNet18_Weights, ResNet34_Weights, ResNet50_Weights, ResNet101_Weights, ResNet152_Weights
+    EfficientNet_B7_Weights, ResNet18_Weights, ResNet34_Weights, ResNet50_Weights, ResNet101_Weights, ResNet152_Weights, \
+    EfficientNet_V2_M_Weights, EfficientNet_V2_S_Weights, EfficientNet_V2_L_Weights
 import os
 import torch
 from src import cct_14_7x2_384, cct_14_7x2_224, cct_7_7x2_224_sine
@@ -160,6 +161,33 @@ class ImageClassificationModel(nn.Module):
                 self.freeze_layers_base_model(base_model)
 
             base_model.classifier = self.classifier_head(2560)
+        elif name_pretrained_model == 'efficientnet_v2_m':
+            base_model = models.efficientnet_v2_m(weights=EfficientNet_V2_M_Weights.DEFAULT)
+            base_model.avgpool = nn.AdaptiveAvgPool2d(output_size=(1, 1))
+
+            if self.freeze_layers:
+                print("Freeze layers of pretrained model")
+                self.freeze_layers_base_model(base_model)
+
+            base_model.classifier = self.classifier_head(1280)
+        elif name_pretrained_model == 'efficientnet_v2_s':
+            base_model = models.efficientnet_v2_s(weights=EfficientNet_V2_S_Weights.DEFAULT)
+            base_model.avgpool = nn.AdaptiveAvgPool2d(output_size=(1, 1))
+
+            if self.freeze_layers:
+                print("Freeze layers of pretrained model")
+                self.freeze_layers_base_model(base_model)
+
+            base_model.classifier = self.classifier_head(1280)
+        elif name_pretrained_model == 'efficientnet_v2_l':
+            base_model = models.efficientnet_v2_l(weights=EfficientNet_V2_L_Weights.DEFAULT)
+            base_model.avgpool = nn.AdaptiveAvgPool2d(output_size=(1, 1))
+
+            if self.freeze_layers:
+                print("Freeze layers of pretrained model")
+                self.freeze_layers_base_model(base_model)
+
+            base_model.classifier = self.classifier_head(1280)
         elif name_pretrained_model == 'cct_14_7x2_224':
             base_model = cct_14_7x2_224(pretrained=self.pretrained, progress=self.pretrained, num_classes=self.num_classes, img_size=self.image_size)
             if self.freeze_layers:
