@@ -5,18 +5,19 @@ dataset:
   path_dataset_test_csv: test.csv
   batch_size: 32
 model:
-  name_pretrained_model: efficientnet_v2_s
-  saving_dir_experiments: ./exps_classifier_brain_tumor/efficientnet_v2_s/
+  name_pretrained_model: cct_14_7x2_224
+  pretrained: 1
+  saving_dir_experiments: ./exps_classifier_brain_tumor/classificatore_cct_224x224/
   saving_dir_model: models
   num_classes: 4
-  num_epoch: 25
-  learning_rate: 0.001
+  num_epoch: 9
+  learning_rate: 0.00001
   scheduler_step_size: 10
-  scheduler_gamma: 0.1
-  freeze_layers: 1
+  scheduler_gamma: 0.8
+  freeze_layers: 0
   #epoch_start_unfreeze: 8
   #layer_start_unfreeze: 0
-  n_nodes: 256
+  n_nodes: 192
   dropout: 0.3
   do_train: 1
   do_test: 1

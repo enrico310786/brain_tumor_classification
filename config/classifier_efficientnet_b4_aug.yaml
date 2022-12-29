@@ -1,20 +1,20 @@
 dataset:
   dataset_path: ./dataset/Final_Dataset_V1/
-  path_dataset_train_csv: train.csv
+  path_dataset_train_csv: train_augmented.csv
   path_dataset_val_csv: val.csv
   path_dataset_test_csv: test.csv
   batch_size: 32
 model:
-  name_pretrained_model: efficientnet_v2_s
-  saving_dir_experiments: ./exps_classifier_brain_tumor/efficientnet_v2_s/
-  saving_dir_model: models
+  name_pretrained_model: efficientnet_b4
+  saving_dir_experiments: ./exps_classifier_brain_tumor/efficientnet_b4/
+  saving_dir_model: models_aug
   num_classes: 4
-  num_epoch: 25
+  num_epoch: 15
   learning_rate: 0.001
-  scheduler_step_size: 10
+  scheduler_step_size: 5
   scheduler_gamma: 0.1
   freeze_layers: 1
-  #epoch_start_unfreeze: 8
+  epoch_start_unfreeze: 5
   #layer_start_unfreeze: 0
   n_nodes: 256
   dropout: 0.3

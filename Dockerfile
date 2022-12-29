@@ -47,4 +47,4 @@ COPY image_classification_model.py /app/image_classification_model.py
 RUN python3.7 -m pip list
 
 #comando per train e test
-CMD ["python3.7","run_train_test_aws.py","--path_config_file","config/classificatore_30_classi_v2.yaml","--aws_directory","class_trasmissioni/","--aws_bucket","questit-trasmissioni-macchine"]
+CMD ["python3.7","run_train_test_aws.py","--path_config_file","config/classifier_efficientnet_v2_s.yaml","--aws_directory","name-directory/","--aws_bucket","name-bucket"]

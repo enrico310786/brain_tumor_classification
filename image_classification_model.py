@@ -25,7 +25,7 @@ class ImageClassificationModel(nn.Module):
         self.image_size = cfg["data"]["size"]
         self.pretrained = cfg["model"].get("pretrained", 1.0) > 0.0
         self.model = self.get_model(cfg["model"]["name_pretrained_model"])
-        summary(self.model, torch.zeros(1, 3, self.image_size, self.image_size))
+        #summary(self.model, torch.zeros(1, 3, self.image_size, self.image_size))
 
     # connetto i vari strati definendo la funzione forward
     def forward(self, x):
@@ -236,17 +236,7 @@ def find_last_checkpoint_file(checkpoint_dir, use_best_checkpoint=False):
             if os.path.isfile(os.path.join(checkpoint_dir, 'best.pth')):
                 path_checkpoint = os.path.join(checkpoint_dir, 'best.pth')
         else:
-            list_epoch_number = []
-            for path in list_file_paths:
-                file_name = path.split('/')[-1]
-                file_name_no_extension = file_name.split('.')[0]
-
-                if file_name_no_extension.split('_')[0] == "checkpoint":
-                    number_epoch = int(file_name_no_extension.split('_')[1])
-                else:
-                    continue
-                list_epoch_number.append(number_epoch)
-            max_epoch = max(list_epoch_number)
-            path_checkpoint = os.path.join(checkpoint_dir, 'checkpoint_' + str(max_epoch) + '.pth')
+            if os.path.isfile(os.path.join(checkpoint_dir, 'latest.pth')):
+                path_checkpoint = os.path.join(checkpoint_dir, 'latest.pth')
 
     return path_checkpoint

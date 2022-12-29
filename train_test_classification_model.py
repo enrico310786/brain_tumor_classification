@@ -91,7 +91,7 @@ def test_model(device,
         ## Plot confusion matrix
         cm = metrics.confusion_matrix(y_test_true, y_test_predicted)
 
-        fig, ax = plt.subplots(figsize=(50, 30))
+        fig, ax = plt.subplots(figsize=(14, 7))
         sns.heatmap(cm, annot=True, fmt='d', ax=ax, cmap=plt.cm.Blues,
                     cbar=False)
         ax.set(xlabel="Pred", ylabel="True", xticklabels=class2label.keys(),
@@ -216,8 +216,8 @@ def train_model(device,
             }
             print("Save best checkpoint at: ", os.path.join(checkpoint_dir, 'best.pth'))
             torch.save(save_obj, os.path.join(checkpoint_dir, 'best.pth'),  _use_new_zipfile_serialization=False)
-            print("Save checkpoint at: ", os.path.join(checkpoint_dir, 'checkpoint_' + str(epoch) + '.pth'))
-            torch.save(save_obj, os.path.join(checkpoint_dir, 'checkpoint_' + str(epoch) + '.pth'),  _use_new_zipfile_serialization=False)
+            print("Save latest checkpoint at: ", os.path.join(checkpoint_dir, 'latest_' + str(epoch) + '.pth'))
+            torch.save(save_obj, os.path.join(checkpoint_dir, 'latest.pth'),  _use_new_zipfile_serialization=False)
 
         else:
             print("Save the current model")
@@ -229,8 +229,8 @@ def train_model(device,
                 'epoch': epoch,
                 'best_eva_accuracy': best_val_epoch_accuracy
             }
-            print("Save checkpoint at: ", os.path.join(checkpoint_dir, 'checkpoint_' + str(epoch) + '.pth'))
-            torch.save(save_obj, os.path.join(checkpoint_dir, 'checkpoint_' + str(epoch) + '.pth'),  _use_new_zipfile_serialization=False)
+            print("Save latest checkpoint at: ", os.path.join(checkpoint_dir, 'latest_' + str(epoch) + '.pth'))
+            torch.save(save_obj, os.path.join(checkpoint_dir, 'latest.pth'),  _use_new_zipfile_serialization=False)
 
         if aws_bucket is not None and aws_directory is not None:
             print('Upload on S3')
@@ -335,7 +335,7 @@ def run_train_test_model(cfg, do_train, do_test, aws_bucket=None, aws_directory=
         # 7 - look if exist a checkpoint
         path_last_checkpoint = find_last_checkpoint_file(checkpoint_dir)
         if path_last_checkpoint is not None:
-            print("Carico il best checkpoint più recente al path: ", path_last_checkpoint)
+            print("Load checkpoint from path: ", path_last_checkpoint)
             checkpoint = torch.load(path_last_checkpoint, map_location=torch.device(device))
             model.load_state_dict(checkpoint['model'])
             model = model.to(device)
@@ -397,6 +397,8 @@ def run_train_test_model(cfg, do_train, do_test, aws_bucket=None, aws_directory=
             if class_name not in class2label:
                 class2label[class_name] = label
 
+        #sort the value of the label
+        class2label = dict(sorted(class2label.items(), key=lambda item: item[1]))
         print("class2label: ", class2label)
 
         print("-------------------------------------------------------------------")

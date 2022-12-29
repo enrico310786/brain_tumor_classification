@@ -1,15 +1,15 @@
 dataset:
   dataset_path: ./dataset/Final_Dataset_V1/
-  path_dataset_train_csv: train.csv
+  path_dataset_train_csv: train_augmented.csv
   path_dataset_val_csv: val.csv
   path_dataset_test_csv: test.csv
   batch_size: 32
 model:
   name_pretrained_model: efficientnet_v2_s
   saving_dir_experiments: ./exps_classifier_brain_tumor/efficientnet_v2_s/
-  saving_dir_model: models
+  saving_dir_model: models_augmented
   num_classes: 4
-  num_epoch: 25
+  num_epoch: 15
   learning_rate: 0.001
   scheduler_step_size: 10
   scheduler_gamma: 0.1
