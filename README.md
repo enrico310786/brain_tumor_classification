@@ -21,8 +21,8 @@ Each directory contains four sub-directories, one for each class of images.
 
 The dataset preprocess consists of the following steps:
 
-1) split the trin set in a train and validation subsets with a split ratio of 80%-20% for each class.
-2) assign each class a different label from 0 to 3
+1) split the train set in a train and validation subsets with a split ratio of 80%-20% for each class.
+2) assign to each class a different label from 0 to 3
 3) create the csv files for train, validation and test dataset with the path to the images and the correct label.
    These files will be used to create the dataloaders.
 
