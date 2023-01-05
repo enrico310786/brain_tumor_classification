@@ -12,16 +12,16 @@ Thanks to this project you can use a series of pretrained model between
 ResNet, EfficientNet, EfficientNet_V2 and Compact Convolutional Transformer architectures
 that you can fine tune on this custom dataset.
 
-You can read more about this project on the following Medium post:
+You can read more about this project on the following Medium post: https://medium.com/@enrico.randellini/image-classification-resnet-vs-efficientnet-vs-efficientnet-v2-vs-compact-convolutional-c205838bbf49
 
 ## Preproces
 
 When you download and unzip the dataset, you can see that is already splitted in a training and testing directories.
-Each directory contains four sub-directory, one for each class of images
+Each directory contains four sub-directories, one for each class of images.
 
 The dataset preprocess consists of the following steps:
 
-1) split the trin set in a train and validation subsets
+1) split the trin set in a train and validation subsets with a split ratio of 80%-20% for each class.
 2) assign each class a different label from 0 to 3
 3) create the csv files for train, validation and test dataset with the path to the images and the correct label.
    These files will be used to create the dataloaders.
