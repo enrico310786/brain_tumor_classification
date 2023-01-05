@@ -39,7 +39,7 @@ COPY credentials /root/.aws/credentials
 COPY download_s3.py /app/download_s3.py
 COPY upload_s3.py /app/upload_s3.py
 COPY logger.py /app/logger.py
-COPY data_image_classification.py /app/data_image_classification.py
+COPY data.py /app/data.py
 COPY train_test_classification_model.py /app/train_test_classification_model.py
 COPY run_train_test_aws.py /app/run_train_test_aws.py
 COPY image_classification_model.py /app/image_classification_model.py
@@ -47,4 +47,4 @@ COPY image_classification_model.py /app/image_classification_model.py
 RUN python3.7 -m pip list
 
 #comando per train e test
-CMD ["python3.7","run_train_test_aws.py","--path_config_file","config/classifier_efficientnet_v2_s.yaml","--aws_directory","name-directory/","--aws_bucket","name-bucket"]
+CMD ["python3.7","run_train_test_aws.py","--path_config_file","config/classifier_efficientnet_b4.yaml","--aws_directory","name-directory/","--aws_bucket","name-bucket"]

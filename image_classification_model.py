@@ -7,7 +7,7 @@ from torchvision.models import EfficientNet_B0_Weights, EfficientNet_B1_Weights,
 import os
 import torch
 from src import cct_14_7x2_384, cct_14_7x2_224, cct_7_7x2_224_sine
-from torchsummary import summary
+from torchinfo import summary
 
 '''
 Reference for Compact Convolutional Transformers
@@ -25,7 +25,14 @@ class ImageClassificationModel(nn.Module):
         self.image_size = cfg["data"]["size"]
         self.pretrained = cfg["model"].get("pretrained", 1.0) > 0.0
         self.model = self.get_model(cfg["model"]["name_pretrained_model"])
-        #summary(self.model, torch.zeros(1, 3, self.image_size, self.image_size))
+
+        print("")
+        summary(model=self.model,
+                input_size=(1, 3, self.image_size, self.image_size),
+                col_names=["input_size", "output_size", "num_params", "trainable"],
+                col_width=20,
+                row_settings=["var_names"])
+        print("")
 
     # connetto i vari strati definendo la funzione forward
     def forward(self, x):

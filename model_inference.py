@@ -6,14 +6,14 @@ from torchvision import transforms
 
 
 ##############################################
-# PARAMETRI E FUNZIONI
+# PARAMETERS AND FUNCTIONS
 ##############################################
 from image_classification_model import ImageClassificationModel
 
-image_test_path = "/home/userpc/Immagini/test/Mercedes/722.8/vlcsnap-2022-08-23-08h28m32s966.png"
-train_dataset_csv = "dataset/augmented_images_30_classi_v1/train_dataset_trasmissioni_augmented.csv"
-path_best_checkpoint = "resources/trained_models/car_transmission_classification_models/best_30_classi.pth"
-path_config_file = "config/classificatore_30_classi_v1.yaml"
+image_test_path = "/mnt/disco_esterno/brain_tumor_dataset/brain_tumor_images/Final_Dataset_V1/test/meningioma_tumor/image(2).jpg"
+train_dataset_csv = "dataset/Final_Dataset_V1/train.csv"
+path_best_checkpoint = "exps_classifier_brain_tumor/efficientnet_b4/models/best.pth"
+path_config_file = "config/classifier_efficientnet_b4.yaml"
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print("device: ", device)
 normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406],std=[0.229, 0.224, 0.225])
@@ -42,11 +42,9 @@ for index, row in df_dataset_train.iterrows():
     if class_name not in class2label:
         class2label[class_name] = label
 
+# sort the value of the label
+class2label = dict(sorted(class2label.items(), key=lambda item: item[1]))
 print("class2label: ", class2label)
-print("")
-print("sorted class2label: ", sorted(class2label, key=class2label.get))
-print("")
-print("class comma separated: ", ','.join(sorted(class2label, key=class2label.get)))
 print("")
 label2class = {k: v for (v, k) in class2label.items()}
 print("label2class: ", label2class)
@@ -59,10 +57,10 @@ print("label2class: ", label2class)
 print('path_config_file: ', path_config_file)
 cfg = load_config(path_config_file)
 
-print("Carico il modello")
+print("Load the model")
 model = ImageClassificationModel(cfg)
 
-print("Carico il best checkpoint al path: ", path_best_checkpoint)
+print("Load the best checkpoint: ", path_best_checkpoint)
 checkpoint = torch.load(path_best_checkpoint, map_location=torch.device(device))
 model.load_state_dict(checkpoint['model'])
 model = model.eval()

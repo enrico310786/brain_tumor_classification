@@ -21,7 +21,7 @@ model:
   do_train: 1
   do_test: 1
 data:
-  size: 224
+  size: 480
   do_resize: 1
   normalization: imagenet
 

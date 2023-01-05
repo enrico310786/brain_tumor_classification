@@ -1,9 +1,9 @@
 import argparse
-from torchsummary import summary
 import yaml
 import torch
 from image_classification_model import ImageClassificationModel
 from prettytable import PrettyTable
+from torchinfo import summary
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print("device: ", device)
